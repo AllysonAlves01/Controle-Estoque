@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Produtos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <h1>Estoque Básico</h1>
+      <nav>
+        <a class="btn" href="/produtos">Produtos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container card">
+    <div class="row between">
+      <h2>Cadastro de Produtos</h2>
+    </div>
+
+    <div th:if="${param.ok}" class="alert success">Produto salvo com sucesso!</div>
+
+    <form class="form-grid" action="#" th:action="@{/produtos}" method="post">
+      <label>Nome
+        <input type="text" name="nome" placeholder="Ex.: Teclado Mecânico" required>
+      </label>
+      <label>Quantidade
+        <input type="number" name="quantidade" min="0" placeholder="0" required>
+      </label>
+      <div class="actions">
+        <button class="btn primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </main>
+
+  <section class="container card">
+    <div class="row between">
+      <h2>Lista de Produtos</h2>
+      <form method="get" action="/produtos" class="row">
+        <input type="text" name="q" th:value="${q}" placeholder="Buscar por nome">
+        <button type="submit" class="btn">Buscar</button>
+      </form>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th class="right">Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="p : ${produtos}">
+            <td th:text="${p.id}">1</td>
+            <td th:text="${p.nome}">Exemplo</td>
+            <td class="right" th:text="${p.quantidade}">0</td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(produtos)}">
+            <td colspan="3" class="muted center">Nenhum produto cadastrado.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="container muted small">Sprint 1 — Cadastro • Sprint 2 — Listagem</footer>
+</body>
+</html>
