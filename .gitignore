@@ -1,0 +1,14 @@
+# Arquivos do Eclipse
+.metadata/
+.classpath
+.project
+.settings/
+
+# Diretórios de build
+/bin/
+/target/
+
+# Arquivos temporários
+*.log
+*.tmp
+*.swp
