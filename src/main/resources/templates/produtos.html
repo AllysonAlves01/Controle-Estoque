@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Estoque - Produtos</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        h1 { text-align: center; color: #333; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        form { margin-bottom: 20px; display: flex; justify-content: center; gap: 10px; }
+        input[type="text"] { padding: 8px; width: 250px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 8px 12px; border: none; border-radius: 5px; background: #007bff; color: white; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 10px; text-align: center; }
+        th { background: #007bff; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .actions { margin-top: 20px; text-align: center; }
+        .actions a { text-decoration: none; color: white; background: #28a745; padding: 8px 15px; border-radius: 5px; }
+        .actions a:hover { background: #218838; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📦 Lista de Produtos</h1>
+
+    <!-- Formulário de Busca -->
+    <form th:action="@{/produtos/buscar}" method="get">
+        <input type="text" name="nome" th:value="${nomeBusca}" placeholder="Digite o nome do produto">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Tabela de Produtos -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="produto : ${produtos}">
+                <td th:text="${produto.id}">1</td>
+                <td th:text="${produto.nome}">Exemplo</td>
+                <td th:text="${produto.quantidade}">10</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(produtos)}">
+                <td colspan="3">Nenhum produto encontrado.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="actions">
+        <a href="/produtos/cadastro">➕ Cadastrar Novo Produto</a>
+    </div>
+</div>
+</body>
+</html>
