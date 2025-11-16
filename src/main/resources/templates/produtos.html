@@ -38,6 +38,7 @@
                 <th>ID</th>
                 <th>Nome</th>
                 <th>Quantidade</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +46,12 @@
                 <td th:text="${produto.id}">1</td>
                 <td th:text="${produto.nome}">Exemplo</td>
                 <td th:text="${produto.quantidade}">10</td>
+                <td>
+  					<a th:href="@{'/produtos/editar/' + ${produto.id}}">Editar</a>
+  					<a th:href="@{'/produtos/excluir/' + ${produto.id}}"
+                       onclick="return confirm('Tem certeza que deseja excluir este produto?');"
+                       style="color: red;">Excluir</a>
+				</td>
             </tr>
             <tr th:if="${#lists.isEmpty(produtos)}">
                 <td colspan="3">Nenhum produto encontrado.</td>
